@@ -71,9 +71,11 @@ public class VirtualJointStatePublisher : MonoBehaviour
 
         // Zero means open, non-zero means close
         if (commandValue == 0)
-            desiredGripperPosition = gripperOpenPosition;
+            GetComponent<PincherController>().gripState = GripState.Opening;
+        //desiredGripperPosition = gripperOpenPosition;
         else
-            desiredGripperPosition = gripperClosedPosition;
+            GetComponent<PincherController>().gripState = GripState.Closing;
+        //desiredGripperPosition = gripperClosedPosition;
 
         Debug.Log($"[Gripper] Command received: {commandValue} → TargetPos: {desiredGripperPosition}");
 
@@ -93,6 +95,7 @@ public class VirtualJointStatePublisher : MonoBehaviour
     void FixedUpdate()
     {
         // Smoothly move toward desired position
+        /*
         currentGripperPosition = Mathf.MoveTowards(
             currentGripperPosition,
             desiredGripperPosition,
@@ -101,6 +104,7 @@ public class VirtualJointStatePublisher : MonoBehaviour
 
         ApplyGripperPosition(leftGripperFinger, currentGripperPosition);
         ApplyGripperPosition(rightGripperFinger, -currentGripperPosition); // mirror
+        */
 
         // ROS publish timer
         timeSinceLastPublish += Time.fixedDeltaTime;
