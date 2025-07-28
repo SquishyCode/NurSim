@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-///    An IK foot solver that predicts where the feet should be placed
-///    This script is provided by Unity tutorial
-///    https://www.youtube.com/watch?v=acMK93A-FSY
-/// </summary>
 public class IKFootSolver : MonoBehaviour
 {
     public bool isMovingForward;
 
     [SerializeField] LayerMask terrainLayer = default;
     [SerializeField] Transform body = default;
-    [SerializeField] Transform footTarget = default;
     [SerializeField] IKFootSolver otherFoot = default;
     [SerializeField] float speed = 4;
     [SerializeField] float stepDistance = .2f;
@@ -36,21 +30,18 @@ public class IKFootSolver : MonoBehaviour
 
     private void Start()
     {
-        if (footTarget == null)
-            footTarget = this.transform;
-
-        footSpacing = footTarget.transform.localPosition.x;
-        currentPosition = newPosition = oldPosition = footTarget.transform.position;
-        currentNormal = newNormal = oldNormal = footTarget.transform.up;
+        footSpacing = transform.localPosition.x;
+        currentPosition = newPosition = oldPosition = transform.position;
+        currentNormal = newNormal = oldNormal = transform.up;
         lerp = 1;
     }
 
     // Update is called once per frame
 
-    void LateUpdate()
+    void Update()
     {
-        footTarget.transform.position = currentPosition + Vector3.up * footYPosOffset;
-        footTarget.transform.localRotation = Quaternion.Euler(footRotOffset);
+        transform.position = currentPosition + Vector3.up * footYPosOffset;
+        transform.localRotation = Quaternion.Euler(footRotOffset);
 
         Ray ray = new Ray(body.position + (body.right * footSpacing) + Vector3.up * rayStartYOffset, Vector3.down);
 

@@ -9,11 +9,13 @@ using UnityEngine.InputSystem;
 ///    the movement of the VR tracking objects.
 /// </summary>
 [System.Serializable]
+/*
 public class AnimationInput
 {
     public string animationPropertyName;
     public InputActionProperty action;
 }
+*/
 
 public class AnimateVRCharacter : MonoBehaviour
 {
