@@ -7198,7 +7198,7 @@ MonoBehaviour:
   publishRateHz: 30
   imageWidth: 640
   imageHeight: 480
-  encoding: rgb8
+  jpegQuality: 75
 --- !u!1 &3423536059472183283
 GameObject:
   m_ObjectHideFlags: 0
@@ -16379,10 +16379,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topicName: /camera/hmd_main
   frameId: 
-  publishRateHz: 30
+  publishRateHz: 15
   imageWidth: 640
   imageHeight: 480
-  encoding: rgb8
+  jpegQuality: 65
 --- !u!1 &7052756328958244000
 GameObject:
   m_ObjectHideFlags: 0

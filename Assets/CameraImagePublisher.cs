@@ -2,23 +2,23 @@ using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 using RosMessageTypes.Sensor;
-using System.Collections;
 using RosMessageTypes.BuiltinInterfaces;
 using RosMessageTypes.Std;
 using Unity.Robotics.Core;
+using System.Collections;
 
 [RequireComponent(typeof(Camera))]
-public class CameraImagePublisher : MonoBehaviour
+public class CameraCompressedPublisher : MonoBehaviour
 {
     [Header("ROS Settings")]
-    public string topicName = "/camera/image_raw";
+    public string topicName = "/camera/image_raw/compressed";
     public string frameId = "camera_link";
     public float publishRateHz = 10f;
 
     [Header("Image Settings")]
     public int imageWidth = 640;
     public int imageHeight = 480;
-    public string encoding = "rgb8";  // Other options: mono8, bgr8, etc.
+    [Range(1, 100)] public int jpegQuality = 75;
 
     private ROSConnection ros;
     private Camera cam;
@@ -31,7 +31,7 @@ public class CameraImagePublisher : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<ImageMsg>(topicName);
+        ros.RegisterPublisher<CompressedImageMsg>(topicName);
 
         cam = GetComponent<Camera>();
         cam.targetTexture = new RenderTexture(imageWidth, imageHeight, 24);
@@ -48,11 +48,11 @@ public class CameraImagePublisher : MonoBehaviour
         if (timeSinceLastPublish >= publishInterval)
         {
             timeSinceLastPublish = 0f;
-            StartCoroutine(PublishCameraImage());
+            StartCoroutine(PublishCompressedImage());
         }
     }
 
-    private IEnumerator PublishCameraImage()
+    private IEnumerator PublishCompressedImage()
     {
         yield return new WaitForEndOfFrame();
 
@@ -64,39 +64,22 @@ public class CameraImagePublisher : MonoBehaviour
         texture2D.Apply();
         RenderTexture.active = currentRT;
 
-        // Get raw image data
-        byte[] rawData = texture2D.GetRawTextureData();
+        byte[] jpgBytes = texture2D.EncodeToJPG(jpegQuality);
 
-        // Flip vertically
-        byte[] flippedData = new byte[rawData.Length];
-        int rowSize = imageWidth * 3;
-
-        for (int y = 0; y < imageHeight; y++)
-        {
-            int srcIndex = y * rowSize;
-            int dstIndex = (imageHeight - 1 - y) * rowSize;
-            System.Buffer.BlockCopy(rawData, srcIndex, flippedData, dstIndex, rowSize);
-        }
-
-        // Create header
         HeaderMsg header = new HeaderMsg
         {
             stamp = new TimeMsg(),
             frame_id = frameId
         };
 
-        // Create the Image message
-        ImageMsg imageMessage = new ImageMsg
+        CompressedImageMsg compressedImageMsg = new CompressedImageMsg
         {
             header = header,
-            height = (uint)imageHeight,
-            width = (uint)imageWidth,
-            encoding = encoding,
-            is_bigendian = 0,
-            step = (uint)(imageWidth * 3),  // 3 bytes per pixel for RGB
-            data = flippedData
+            format = "jpeg",
+            data = jpgBytes
         };
 
-        ros.Publish(topicName, imageMessage);
+        ros.Publish(topicName, compressedImageMsg);
     }
 }
+
