@@ -28,9 +28,17 @@ public class AnchorPublisher : MonoBehaviour
         ros.RegisterPublisher<TFMessageMsg>("/tf");
     }
 
+double GetUnixTime()
+{
+    DateTime utcNow = DateTime.UtcNow;
+    DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    return (utcNow - unixEpoch).TotalSeconds;
+}
+
+
     void Update()
     {
-        double time = Time.time;
+        double time = GetUnixTime(); 
         List<TransformStampedMsg> tfList = new List<TransformStampedMsg>();
 
         foreach (var namedObj in trackedObjects)
