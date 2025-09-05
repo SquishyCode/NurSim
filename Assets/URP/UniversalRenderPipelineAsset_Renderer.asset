@@ -53,10 +53,10 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 3451809670685575135}
   - {fileID: 5542613740546226747}
-  - {fileID: 0}
+  - {fileID: 6373182054764773741}
   m_RendererFeatureMap: dfc778659b4ae72f3bfa74bcd451eb4c6d0126ef4f177258
   m_UseNativeRenderPass: 0
-  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
+  postProcessData: {fileID: 0}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
-  m_IntermediateTextureMode: 1
+  m_IntermediateTextureMode: 0
 --- !u!114 &3451809670685575135
 MonoBehaviour:
   m_ObjectHideFlags: 0

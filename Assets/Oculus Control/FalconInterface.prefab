@@ -2640,7 +2640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &546543928542961617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7153,6 +7153,7 @@ GameObject:
   - component: {fileID: 2968792934913891326}
   - component: {fileID: 8119113242062052023}
   - component: {fileID: 3765193853540625506}
+  - component: {fileID: 3669556236379055743}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7188,7 +7189,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -7408,6 +7409,24 @@ MonoBehaviour:
   imageWidth: 640
   imageHeight: 480
   jpegQuality: 75
+--- !u!114 &3669556236379055743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3234327121106105879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusMode: -1
+  m_LightEstimationMode: -1
+  m_AutoFocus: 1
+  m_LightEstimation: 0
+  m_FacingDirection: 1
+  m_RenderMode: 0
 --- !u!1 &3423536059472183283
 GameObject:
   m_ObjectHideFlags: 0
@@ -15475,6 +15494,7 @@ GameObject:
   - component: {fileID: 2770966194290286032}
   - component: {fileID: 4159975441119690493}
   - component: {fileID: 1561688026436716334}
+  - component: {fileID: 7889836867564413487}
   m_Layer: 0
   m_Name: FalconInterface
   m_TagString: Untagged
@@ -15566,6 +15586,23 @@ MonoBehaviour:
   rightControllerTopic: /rightControllerInfo
   headsetTopic: /headsetInfo
   messagesPerSecond: 30
+--- !u!114 &7889836867564413487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287253735072360466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7b48bd6ede2544891815b2d8ba2173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /task/state
+  triggerKey: Docking
+  objectsToDisable:
+  - {fileID: 5776262997359494917}
+  targetCamera: {fileID: 4282952165134369658}
 --- !u!1 &6317482162042069637
 GameObject:
   m_ObjectHideFlags: 0
