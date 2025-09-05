@@ -59,8 +59,8 @@ public class MotionConstraintGuide : MonoBehaviour
             return Vector3.zero;
 
         float x = float.Parse(coords[0]);
-        float y = float.Parse(coords[1]);
-        float z = float.Parse(coords[2]);
+        float z = float.Parse(coords[1]);
+        float y = float.Parse(coords[2]);
 
         return new Vector3(x, y, z);
     }
