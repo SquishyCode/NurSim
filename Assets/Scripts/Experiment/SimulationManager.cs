@@ -35,7 +35,8 @@ public class SimulationManager : MonoBehaviour
         ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<StringMsg>("unity/ip", latch: true);
         ros.RegisterPublisher<StringMsg>("trial/dash");
-        ros.RegisterPublisher<BoolMsg>("/haptic/eject");
+        ros.RegisterPublisher<StringMsg>("/task/error");
+        ros.RegisterPublisher<BoolMsg>("/task/end");
         
         if (loadOnStart)
         {
@@ -49,17 +50,7 @@ public class SimulationManager : MonoBehaviour
         //     Destroy(activeInterface);
         //     LoadInterfaceScene(0);
         // });
-        HTTPDash.Instance.RegisterButton("Task Reset", "Reset", s =>
-        {
-            Debug.Log("Reset button clicked from HTTP!");
-            ResetCurrentEnvironment();
-            Destroy(activeInterface);
-            LoadInterfaceScene(0);
-        });
-        HTTPDash.Instance.RegisterButton("Haptics", "Eject", s =>
-        {
-            ros.Publish("/haptic/eject", new BoolMsg(true));
-        });
+       
         ros.Subscribe<BoolMsg>("/haptic/latched", msg =>
         {
             if (msg.data != lastLatch)
@@ -69,22 +60,42 @@ public class SimulationManager : MonoBehaviour
             lastLatch = msg.data;
         });
         ros.RegisterPublisher<BoolMsg>("/ui/show_hints");
-        HTTPDash.Instance.RegisterDropdown("Show Hints", "Update", new string[] { "On", "Off"}, s => ros.Publish("/ui/show_hints", new BoolMsg(s.Equals("On"))));
-        HTTPDash.Instance.RegisterDropdown("Test Dropdown", "Press Me Too", new string[]{"Dimitri", "Nikita", "Lorena"}, s => Debug.LogWarning(s));
-        HTTPDash.Instance.RegisterInput("Test Input", "Press Me Last", "Write here", s => Debug.LogWarning(s));
-        HTTPDash.Instance.RegisterInput("Dash Message", "Send", "Write here", s => ros.Publish("trial/dash", new StringMsg(s)));
-        HTTPDash.Instance.RegisterDropdown("Medicines", "Press Me Too", new string[]{"Advil", "peroxide", "D3"}, s =>
+        HTTPDash.Instance.RegisterButton("End Task", "End",  s => ros.Publish("/task/end", new BoolMsg(true)));
+        HTTPDash.Instance.RegisterButton("Bedhead Collision", "Mark", (string s) =>
         {
+            ros.Publish("/task/error", new StringMsg("bedhead_collision"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Bedhead Collision", "orange");
+        });
 
-            Debug.LogWarning("Medicine selected" + s);
-        });
-        
-        HTTPDash.Instance.RegisterButton("Count", "Increment", s =>
+        HTTPDash.Instance.RegisterButton("Unplug Fail", "Mark", (string s) =>
         {
-            Debug.LogWarning("Count " +  count++);
-            
+            ros.Publish("/task/error", new StringMsg("unplug_fail"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Unplug Fail", "orange");
         });
         
+        HTTPDash.Instance.RegisterButton("Plug Fail", "Mark", (string s) =>
+        {
+            ros.Publish("/task/error", new StringMsg("plug_fail"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Plug Fail", "orange");
+        });
+        
+        HTTPDash.Instance.RegisterButton("Environment Collision", "Mark", (string s) =>
+        {
+            ros.Publish("/task/error", new StringMsg("environment_collision"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Environment Collision", "orange");
+        });
+        
+        HTTPDash.Instance.RegisterButton("Pick Fail", "Mark", (string s) =>
+        {
+            ros.Publish("/task/error", new StringMsg("pick_fail"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Pick Fail", "orange");
+        });
+        
+        HTTPDash.Instance.RegisterButton("Place Fail", "Mark", (string s) =>
+        {
+            ros.Publish("/task/error", new StringMsg("place_fail"));
+            HTTPDash.Instance.SendNotification("Error Logged", $"Place Fail", "orange");
+        });
     }
     
     private int count = 0;
