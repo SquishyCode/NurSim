@@ -15145,6 +15145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4273817902384923565}
+  - component: {fileID: 1811746928612852275}
   m_Layer: 0
   m_Name: Offset
   m_TagString: Untagged
@@ -15168,6 +15169,21 @@ Transform:
   - {fileID: 3228832752723067129}
   m_Father: {fileID: 4146609933562307971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1811746928612852275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183542907758849551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb66a84de72acec4ca2dded3bdab474e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicName: /task/constraint
+  gameObject: {fileID: 8462103870352874772}
+  invert: 0
 --- !u!1 &6200774166936885472
 GameObject:
   m_ObjectHideFlags: 0
@@ -15602,6 +15618,9 @@ MonoBehaviour:
   triggerKey: Docking
   objectsToDisable:
   - {fileID: 5776262997359494917}
+  - {fileID: 5138179096583660633}
+  - {fileID: 5189894294591430082}
+  - {fileID: 1913532464502564262}
   targetCamera: {fileID: 4282952165134369658}
 --- !u!1 &6317482162042069637
 GameObject:
@@ -20846,6 +20865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot Tracker
       objectReference: {fileID: 0}
+    - target: {fileID: 6537068841768193972, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7882187937472503280, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -21191,6 +21214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vive Ultimate Tracker
       objectReference: {fileID: 0}
+    - target: {fileID: 6537068841768193972, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7882187937472503280, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -21334,6 +21361,10 @@ PrefabInstance:
     - target: {fileID: 6537068841768193972, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
       propertyPath: m_Name
       value: Bedhead Tracker
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537068841768193972, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7882187937472503280, guid: 803cdd2482110ad4694e84729edc96f1, type: 3}
       propertyPath: m_LocalPosition.x
