@@ -6,8 +6,16 @@ using System.Collections;
 
 public class TopicHapticTrigger : MonoBehaviour
 {
+
+    public enum TopicType
+    {
+        STRING,
+        BOOL
+    }
     [Header("ROS Settings")]
     [Tooltip("Name of the ROS topic to subscribe to.")]
+    
+    [SerializeField] public TopicType topicType = TopicType.STRING;
     public string rosTopicName = "/my_string_topic";
 
     public string[] triggers;
@@ -33,12 +41,35 @@ public class TopicHapticTrigger : MonoBehaviour
             return;
         }
 
-        ros.Subscribe<StringMsg>(rosTopicName, OnRosMessage);
+        switch (topicType)
+        {
+            case TopicType.STRING: ros.Subscribe<StringMsg>(rosTopicName, OnRosMessageString); break;
+            case TopicType.BOOL: ros.Subscribe<BoolMsg>(rosTopicName, OnRosMessageBool); break;
+        }
     }
 
-    void OnRosMessage(StringMsg msg)
+    void OnRosMessageString(StringMsg msg)
     {
         string newMessage = msg.data;
+
+        // Only trigger if the message content changed
+        if (newMessage != lastMessage)
+        {
+            lastMessage = newMessage;
+            for (int i = 0; i < triggers.Length; i++)
+            {
+                if (newMessage == triggers[i])
+                {
+                    TriggerHaptics();
+                }
+            }
+            
+        }
+    }
+
+    void OnRosMessageBool(BoolMsg msg)
+    {
+        string newMessage = msg.data?"true":"false";
 
         // Only trigger if the message content changed
         if (newMessage != lastMessage)

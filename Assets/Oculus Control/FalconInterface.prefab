@@ -3598,7 +3598,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854598733097014819}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb66a84de72acec4ca2dded3bdab474e, type: 3}
   m_Name: 
@@ -6327,7 +6327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb95762e2601d24e96f88db2ced5a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFormatString: '{string: /right_arm/oclulus_mapping/falcon_scale}x'
+  textFormatString: '{string: /right_arm/oculus_mapping/falcon_scale}x'
   refreshRate: 0.1
 --- !u!1 &2919742666597156015
 GameObject:
@@ -13331,6 +13331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451f560538c46ed40a59139edfb141e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  topicType: 0
   rosTopicName: /task/state
   triggers:
   - Docking
@@ -16123,7 +16124,7 @@ Transform:
   m_GameObject: {fileID: 6183542907758849551}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000008940696, y: -0.00000025192273, z: -0.000000019790603, w: 1}
-  m_LocalPosition: {x: 0.03828105, y: 0.19567302, z: 0.015704505}
+  m_LocalPosition: {x: 0.023925792, y: 0.12229554, z: 0.0098152235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16158,10 +16159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 4146609933562307971}
-  followX: 0
+  followX: 1
   followY: 1
-  followZ: 0
-  positionOffset: {x: 0, y: 0.2, z: 0}
+  followZ: 1
+  positionOffset: {x: 0, y: 0.125, z: 0}
   lockRotX: 0
   lockRotY: 0
   lockRotZ: 0
@@ -16493,6 +16494,8 @@ GameObject:
   - component: {fileID: 4159975441119690493}
   - component: {fileID: 1561688026436716334}
   - component: {fileID: 7889836867564413487}
+  - component: {fileID: 5515558217004875364}
+  - component: {fileID: 4003414107669788830}
   m_Layer: 0
   m_Name: FalconInterface
   m_TagString: Untagged
@@ -16604,6 +16607,46 @@ MonoBehaviour:
   - {fileID: 5189894294591430082}
   - {fileID: 1913532464502564262}
   targetCamera: {fileID: 4282952165134369658}
+--- !u!114 &5515558217004875364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287253735072360466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451f560538c46ed40a59139edfb141e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicType: 1
+  rosTopicName: /right_arm/teleoperation/is_tracking
+  triggers:
+  - false
+  handNode: 5
+  amplitude: 0.1
+  frequency: 0.003
+  duration: 0.1
+--- !u!114 &4003414107669788830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287253735072360466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451f560538c46ed40a59139edfb141e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topicType: 1
+  rosTopicName: /right_arm/teleoperation/is_tracking
+  triggers:
+  - true
+  handNode: 5
+  amplitude: 0.1
+  frequency: 1
+  duration: 0.1
 --- !u!1 &6317482162042069637
 GameObject:
   m_ObjectHideFlags: 0
