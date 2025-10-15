@@ -15,6 +15,7 @@ TagManager:
   - RGBCamera
   - DepthCamera
   - ARObject
+  - RealAR
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - 
   - 
   - XR Camera Ignore
-  - 
+  - VirtualMarkersLayer
   - 
   - 
   - 
