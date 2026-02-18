@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.htc.upm.vive.openxr": {
-      "version": "file:C:/Users/dasaliba/Downloads/com.htc.upm.vive.openxr-2.5.1.tgz",
+      "version": "file:C:/Users/mjmer/Downloads/com.htc.upm.vive.openxr-2.5.1.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
