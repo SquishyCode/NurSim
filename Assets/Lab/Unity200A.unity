@@ -2423,7 +2423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &431224589
 Transform:
   m_ObjectHideFlags: 0
@@ -5299,6 +5299,10 @@ PrefabInstance:
     - target: {fileID: 702946891374405994, guid: b0c89aaa1a3dcf440b09f2e9919acb3c, type: 3}
       propertyPath: m_Name
       value: IONA
+      objectReference: {fileID: 0}
+    - target: {fileID: 702946891374405994, guid: b0c89aaa1a3dcf440b09f2e9919acb3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3430922113509506315, guid: b0c89aaa1a3dcf440b09f2e9919acb3c, type: 3}
       propertyPath: m_LocalPosition.y
