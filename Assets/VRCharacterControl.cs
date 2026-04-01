@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 
@@ -18,11 +18,20 @@ public class VRCharacterControl : MonoBehaviour
     private float bobbingTimer = 0f;
     private Vector3 baseLocalPos;
 
+    //Added Rigidbody for Collisions
+    private Rigidbody rb;
+
+
     void OnEnable()
     {
         baseLocalPos = transform.localPosition;
         moveAction.action.Enable();
         headsetRotationAction.action?.Enable();
+
+        if(rb != null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
     }
 
     void OnDisable()
@@ -54,7 +63,17 @@ public class VRCharacterControl : MonoBehaviour
             Vector3 moveDirection = headsetForward * input.y + headsetRight * input.x;
             Vector3 movement = moveDirection.normalized * moveSpeed * Time.deltaTime;
 
-            transform.position += movement;
+
+            if (rb != null)
+            {
+                //Added code to work when rigidbody is there
+                rb.MovePosition(rb.position + movement);
+            }
+            else
+            {
+                //Original Code occurs if rigidbody is null
+                transform.position += movement;
+            }
 
             ApplyBobbing(input);
         }
