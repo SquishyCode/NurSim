@@ -11,8 +11,8 @@ public class TimedObjectiveHandler : MonoBehaviour
     private Action _onFailed;
 
     // Inner objective (collect or checkpoint) nested inside the timer
-    private CollectObjectiveHandler _innerCollect;
-    private CheckpointObjectiveHandler _innerCheckpoint;
+    // private CollectObjectiveHandler _innerCollect;
+    // private CheckpointObjectiveHandler _innerCheckpoint;
 
     public float TimeRemaining => Mathf.Max(0, _timeLimit - _elapsed);
 
@@ -26,14 +26,14 @@ public class TimedObjectiveHandler : MonoBehaviour
         // Boot inner objective
         switch (config.timedInnerObjective)
         {
-            case ObjectiveType.Collect:
-                _innerCollect = gameObject.AddComponent<CollectObjectiveHandler>();
-                _innerCollect.Initialize(config.collectableTag, config.collectTargetCount, OnInnerComplete);
-                break;
-            case ObjectiveType.Checkpoint:
-                _innerCheckpoint = gameObject.AddComponent<CheckpointObjectiveHandler>();
-                _innerCheckpoint.Initialize(config.checkpointTag, OnInnerComplete);
-                break;
+            // case ObjectiveType.Collect:
+            //     _innerCollect = gameObject.AddComponent<CollectObjectiveHandler>();
+            //     _innerCollect.Initialize(config.collectableTag, config.collectTargetCount, OnInnerComplete);
+            //     break;
+            // case ObjectiveType.Checkpoint:
+            //     _innerCheckpoint = gameObject.AddComponent<CheckpointObjectiveHandler>();
+            //     _innerCheckpoint.Initialize(config.checkpointTag, OnInnerComplete);
+            //     break;
         }
 
         Debug.Log($"Timed objective started: {_timeLimit}s");
