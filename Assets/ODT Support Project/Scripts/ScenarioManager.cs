@@ -5,19 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ScenarioManager : MonoBehaviour
 {
-    [Header("All Scenario Configs")]
+    [Header("Scenario Registry")]
     [SerializeField] private ScenarioConfig[] allScenarios;
 
-    // Active state
     public ScenarioConfig ActiveConfig { get; private set; }
-    public bool IsComplete { get; private set; }
+    public TaskEnvironment ActiveEnvironment { get; private set; }
+    public Trial ActiveTrial { get; private set; }
 
-    // Handlers — assign in Inspector or let manager find them
-    // private CollectObjectiveHandler _collectHandler;
-    // private CheckpointObjectiveHandler _checkpointHandler;
-    private TimedObjectiveHandler _timedHandler;
-
-    // Singleton
     public static ScenarioManager Instance { get; private set; }
 
     private void Awake()
@@ -32,7 +26,7 @@ public class ScenarioManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(id))
         {
-            Debug.LogWarning("ScenarioManager: No scenario ID set. Loading first scenario as fallback.");
+            Debug.LogWarning("ScenarioManager: No scenario ID in session, falling back to first config.");
             id = allScenarios[0].scenarioId;
         }
 
@@ -40,7 +34,7 @@ public class ScenarioManager : MonoBehaviour
 
         if (ActiveConfig == null)
         {
-            Debug.LogError($"ScenarioManager: No config found for ID '{id}'");
+            Debug.LogError($"ScenarioManager: No ScenarioConfig found for id '{id}'");
             return;
         }
 
@@ -49,68 +43,69 @@ public class ScenarioManager : MonoBehaviour
 
     private IEnumerator LoadScenario(ScenarioConfig config)
     {
-        // Load additive scene
+        // Load the additive scene that contains the TaskEnvironment for this scenario
         if (!string.IsNullOrEmpty(config.additiveSceneName))
         {
-            AsyncOperation load = SceneManager.LoadSceneAsync(config.additiveSceneName, LoadSceneMode.Additive);
-            yield return new WaitUntil(() => load.isDone);
+            AsyncOperation op = SceneManager.LoadSceneAsync(config.additiveSceneName, LoadSceneMode.Additive);
+            yield return new WaitUntil(() => op.isDone);
         }
 
-        // Show briefing (hook into your UI here)
-        Debug.Log($"[{config.displayName}] {config.briefing}");
+        // TaskEnvironment.Awake() will have run by now and registered itself in instances.
+        // Find the one that belongs to our additive scene.
+        ActiveEnvironment = FindEnvironmentForScene(config.additiveSceneName);
 
-        // Boot the appropriate handler
-        switch (config.objectiveType)
+        if (ActiveEnvironment == null)
         {
-            case ObjectiveType.Collect:
-                BootCollect(config);
-                break;
-            case ObjectiveType.Checkpoint:
-                BootCheckpoint(config);
-                break;
-            case ObjectiveType.Timed:
-                BootTimed(config);
-                break;
+            Debug.LogError($"ScenarioManager: No TaskEnvironment found in scene '{config.additiveSceneName}'");
+            yield break;
         }
+
+        // The Trial component should already be on the TaskEnvironment (or its GameObject)
+        ActiveTrial = ActiveEnvironment.trial;
+
+        if (ActiveTrial == null)
+        {
+            Debug.LogError($"ScenarioManager: TaskEnvironment in '{config.additiveSceneName}' has no Trial assigned.");
+            yield break;
+        }
+
+        // Hook completion/failure before starting
+        // ActiveTrial.onTrialComplete += OnScenarioComplete;
+        // ActiveTrial.onTrialFailed  += OnScenarioFailed;
+
+        Debug.Log($"[ScenarioManager] Loaded '{config.displayName}': {config.briefing}");
+
+        // Trial.Start() in SenquentialGoalTrial calls StartTrial() itself.
+        // Only call manually if autoStartTrial is true AND the trial doesn't self-start.
+        // if (config.autoStartTrial && !ActiveTrial.HasStarted)
+        //     ActiveTrial.StartTrial();
     }
 
-    // ── Handler bootstraps ───────────────────────────────────────────
-
-    private void BootCollect(ScenarioConfig config)
+    private void OnScenarioComplete()
     {
-        //_collectHandler = gameObject.AddComponent<CollectObjectiveHandler>();
-        //_collectHandler.Initialize(config.collectableTag, config.collectTargetCount, OnScenarioComplete);
-    }
-
-    private void BootCheckpoint(ScenarioConfig config)
-    {
-        // _checkpointHandler = gameObject.AddComponent<CheckpointObjectiveHandler>();
-        // _checkpointHandler.Initialize(config.checkpointTag, OnScenarioComplete);
-    }
-
-    private void BootTimed(ScenarioConfig config)
-    {
-        _timedHandler = gameObject.AddComponent<TimedObjectiveHandler>();
-        _timedHandler.Initialize(config.timeLimitSeconds, config, OnScenarioComplete, OnScenarioFailed);
-    }
-
-    // ── Completion ───────────────────────────────────────────────────
-
-    public void OnScenarioComplete()
-    {
-        if (IsComplete) return;
-        IsComplete = true;
-        Debug.Log($"Scenario '{ActiveConfig.displayName}' COMPLETE");
+        Debug.Log($"[ScenarioManager] Scenario '{ActiveConfig.displayName}' COMPLETE");
         // Hook: show results UI, save progress, return to menu, etc.
     }
 
-    public void OnScenarioFailed()
+    private void OnScenarioFailed()
     {
-        Debug.Log($"Scenario '{ActiveConfig.displayName}' FAILED");
+        Debug.Log($"[ScenarioManager] Scenario '{ActiveConfig.displayName}' FAILED");
         // Hook: show failure UI, offer retry, etc.
     }
 
-    // ── Helpers ──────────────────────────────────────────────────────
+    private void OnDestroy()
+    {
+        if (ActiveTrial != null)
+        {
+            // ActiveTrial.onTrialComplete -= OnScenarioComplete;
+            // ActiveTrial.onTrialFailed  -= OnScenarioFailed;
+        }
+
+        if (ActiveConfig != null && !string.IsNullOrEmpty(ActiveConfig.additiveSceneName))
+            SceneManager.UnloadSceneAsync(ActiveConfig.additiveSceneName);
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
 
     private ScenarioConfig FindConfig(string id)
     {
@@ -119,10 +114,10 @@ public class ScenarioManager : MonoBehaviour
         return null;
     }
 
-    private void OnDestroy()
+    private TaskEnvironment FindEnvironmentForScene(string sceneName)
     {
-        // Unload additive scene on exit
-        if (ActiveConfig != null && !string.IsNullOrEmpty(ActiveConfig.additiveSceneName))
-            SceneManager.UnloadSceneAsync(ActiveConfig.additiveSceneName);
+        foreach (var env in TaskEnvironment.instances)
+            if (env.sceneName == sceneName) return env;
+        return null;
     }
 }

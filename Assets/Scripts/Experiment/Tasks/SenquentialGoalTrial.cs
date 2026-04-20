@@ -23,14 +23,19 @@ public class SenquentialGoalTrial : Trial
 
     public void OnGoalCompleted()
     {
-        HTTPDash.Instance.SendNotification("Goal Reached", "Robot reached goal #" + currentGoalIndex, "green");
+        
+        //TODO: Add some type of check here to verify if we are using robot to test or human VR player. If human, we may want to avoid sending notifications for every goal completion. If this HTTP req is going to the robot again.
+        // if (currentGoalIndex >= 0 && environment.getObjectListByKey("robots")[0] != null) // Only notify if a real goal was completed
+        // {
+        //     HTTPDash.Instance.SendNotification("Goal Reached", "Robot reached goal #" + currentGoalIndex, "green");
+        // }
         GameObject[] goals = base.environment.getObjectListByKey("goals");
         GoalStepping:
         currentGoalIndex++;
         if (currentGoalIndex >= goals.Length)
         {
             ros.Publish("trial/goal_index", new Int32Msg(currentGoalIndex));
-            ros.Publish("trial/progress_description", new StringMsg((currentGoalIndex) + "/" +goals.Length));
+            ros.Publish("trial/progress_description", new StringMsg((currentGoalIndex) + "/" + goals.Length));
             StopTrial();
         }
         else
