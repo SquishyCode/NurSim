@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitySystemIP: 130.215.181.6
   environmentSceneNames:
+  - ODT_Uncluttered_Room
   - Unity200A
   - HospitalNew
   interfaces:
