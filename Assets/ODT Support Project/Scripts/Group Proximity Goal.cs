@@ -15,7 +15,7 @@ public class GroupProximityGoal : TrialGoal
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
         //robot = TaskEnvironment.instances[TaskEnvironment.currentIndex].getObjectListByKey("robots")[robotIndex];
     }
 

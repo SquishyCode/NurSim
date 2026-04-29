@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 362781}
-  m_IndirectSpecularColor: {r: 0.0033790886, g: 0.0035446119, b: 0.008150468, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -274,8 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitySystemIP: localhost
   environmentSceneNames:
-  - ODT_Locomotion
   - ODT_Uncluttered_Room
+  - ODT_Locomotion
   - Unity200A
   - HospitalNew
   interfaces:
