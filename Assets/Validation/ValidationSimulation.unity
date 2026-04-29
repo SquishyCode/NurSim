@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitySystemIP: localhost
   environmentSceneNames:
+  - ODT_Locomotion
   - ODT_Uncluttered_Room
   - Unity200A
   - HospitalNew
