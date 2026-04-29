@@ -6,8 +6,6 @@ using Object = System.Object;
 
 public class TaskEnvironment : MonoBehaviour
 {
-    
-    
 
     [System.Serializable]
     public class ObjectListMapItem

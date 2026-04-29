@@ -18,6 +18,7 @@ public class HTTPDash : MonoBehaviour
     private Queue<HttpListenerContext> waitingClients = new Queue<HttpListenerContext>();
     private object notifyLock = new object();
     public string localIP = "localhost";
+    //robot host = 130.215.181.6
 
     void Awake()
     {
@@ -229,7 +230,7 @@ public class HTTPDash : MonoBehaviour
 
 
     
-    [SerializeField ]public List<HTMLDashCard> cards = new List<HTMLDashCard>();
+    [SerializeField]public List<HTMLDashCard> cards = new List<HTMLDashCard>();
 
     public void RegisterButton(string title, string buttonText, Action<String> callback)
     {
