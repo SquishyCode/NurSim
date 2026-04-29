@@ -52,8 +52,7 @@ public class SenquentialGoalTrial : Trial
             ros.Publish("trial/progress_description", new StringMsg((currentGoalIndex) + "/" +goals.Length));
             if (currentGoalIndex > 0)
             {
-                ros.Publish("trial/goal_index", new Int32Msg(currentGoalIndex));
-                
+                ros.Publish("trial/goal_index", new Int32Msg(currentGoalIndex));                
             }
         }
         

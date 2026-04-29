@@ -7,13 +7,13 @@ public class ProximityGoal : TrialGoal
     //public int robotIndex = 0;
     public double radius = 1;
 
-    public GameObject fufiller;
+    public GameObject fufiller = null;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
         //robot = TaskEnvironment.instances[TaskEnvironment.currentIndex].getObjectListByKey("robots")[robotIndex];
     }
 
@@ -32,7 +32,7 @@ public class ProximityGoal : TrialGoal
     }
 
     public override void Activate()
-    {
+    {        
         gameObject.SetActive(true);
     }
 }

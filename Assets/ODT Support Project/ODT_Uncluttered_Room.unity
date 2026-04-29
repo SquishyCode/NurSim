@@ -474,13 +474,14 @@ MonoBehaviour:
     - {fileID: 1478186584}
     - {fileID: 392646111}
     - {fileID: 2048093013}
+    - {fileID: 274220880}
   - key: robots
     objects:
     - {fileID: 1113854308}
   - key: cameras
     objects:
     - {fileID: 1838104177}
-  sceneName: Unity200A
+  sceneName: ODT_Uncluttered_Room
 --- !u!4 &37639706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6039136598254185236, guid: 61d113b25b3f8fdf6aeb15e7a06161bd, type: 3}
@@ -3619,7 +3620,7 @@ GameObject:
   - component: {fileID: 274220881}
   - component: {fileID: 274220885}
   - component: {fileID: 274220884}
-  - component: {fileID: 274220883}
+  - component: {fileID: 274220886}
   m_Layer: 0
   m_Name: medicine_container - Container
   m_TagString: Untagged
@@ -3653,22 +3654,6 @@ Transform:
   - {fileID: 320151732}
   m_Father: {fileID: 2134113431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &274220883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274220880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac41d7c6a9d3746b15d92487ef1f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  completed: 0
-  contextMessage: TESSSTING TWSTING
-  radius: 1
-  fufiller: {fileID: 0}
 --- !u!114 &274220884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3853,6 +3838,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &274220886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274220880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d9fad85b8a05040b3e7103e516da72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completed: 0
+  contextMessage: Fill the box with pills!!!
+  radius: 1
+  fufiller:
+  - {fileID: 745884494}
+  - {fileID: 1428803603}
+  - {fileID: 560633424}
+  - {fileID: 280734533}
+  - {fileID: 1155846191}
+  numRequired: 3
+  numCurrent: 0
 --- !u!1001 &280734531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6657,7 +6665,6 @@ GameObject:
   - component: {fileID: 472536476}
   - component: {fileID: 472536480}
   - component: {fileID: 472536479}
-  - component: {fileID: 472536478}
   m_Layer: 0
   m_Name: medicine_container - Container
   m_TagString: Untagged
@@ -6691,22 +6698,6 @@ Transform:
   - {fileID: 1838787650}
   m_Father: {fileID: 951151793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &472536478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 472536475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac41d7c6a9d3746b15d92487ef1f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  completed: 0
-  contextMessage: 
-  radius: 1
-  fufiller: {fileID: 0}
 --- !u!114 &472536479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8009,6 +8000,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8804064570011615228, guid: bae245e5cf7c01b03af6761cfe5bbd82, type: 3}
   m_PrefabInstance: {fileID: 556131792}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &560633424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6288806480949567312, guid: 9416d0e920f46104784f21e8669c4ca9, type: 3}
+  m_PrefabInstance: {fileID: 203602938}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &564225831
 PrefabInstance:
@@ -13675,6 +13671,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1189314630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &745884494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6288806480949567312, guid: 9416d0e920f46104784f21e8669c4ca9, type: 3}
+  m_PrefabInstance: {fileID: 1021500970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &746790814
 GameObject:
   m_ObjectHideFlags: 0
@@ -20325,6 +20326,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146303995}
   m_Mesh: {fileID: 4538650183317136075, guid: 5511ac35fb156e4379ff33a096a39696, type: 3}
+--- !u!1 &1155846191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 126543075583236507, guid: aaefe841773103144b603c4c8f0c070b, type: 3}
+  m_PrefabInstance: {fileID: 1725185856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1171068653
 Mesh:
   m_ObjectHideFlags: 0
@@ -25218,6 +25224,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1428803603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6288806480949567312, guid: 9416d0e920f46104784f21e8669c4ca9, type: 3}
+  m_PrefabInstance: {fileID: 2064367668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1431302842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26855,7 +26866,6 @@ GameObject:
   - component: {fileID: 1543805658}
   - component: {fileID: 1543805662}
   - component: {fileID: 1543805661}
-  - component: {fileID: 1543805660}
   m_Layer: 0
   m_Name: medicine_container - Container
   m_TagString: Untagged
@@ -26889,22 +26899,6 @@ Transform:
   - {fileID: 771964415}
   m_Father: {fileID: 951151793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1543805660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543805657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50ac41d7c6a9d3746b15d92487ef1f7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  completed: 0
-  contextMessage: TESTING TESTING
-  radius: 1
-  fufiller: {fileID: 0}
 --- !u!114 &1543805661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36791,7 +36785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completed: 0
-  contextMessage: This is the second goal
+  contextMessage: This is the third goal
   radius: 1
   fufiller: {fileID: 1113854308}
 --- !u!1 &2057426116
